@@ -108,12 +108,7 @@ public class Channel {
 						}
 					}
 				}
-				if (storage.getPlugin().getConfig().formatLocalChat) {
-					if ((sender.getServer().getInfo().getName().equals(player.getServer().getInfo().getName()))) {
-						if (!chatter.getVerbose())
-							player.sendMessage(FontFormat.translateString(message));
-					}
-				}
+
 
 			}
 		} else {
@@ -121,6 +116,15 @@ public class Channel {
 			this.chatters.remove(chatter);
 			chatter.removeChannel(this);
 		}
+		for (ProxiedPlayer player : storage.getPlugin().getPlayers()) {
+			if (storage.getPlugin().getConfig().formatLocalChat) {
+				if ((sender.getServer().getInfo().getName().equals(player.getServer().getInfo().getName()))) {
+					if (!chatter.getVerbose())
+						player.sendMessage(FontFormat.translateString(message));
+				}
+			}
+		}
+
 	}
 
 }
